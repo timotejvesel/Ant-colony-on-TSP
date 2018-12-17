@@ -41,7 +41,6 @@ def main():
         for j in range(n):
             razdalja[i][j] = i*j+1
     korak = 0
-    print(razdalja)
     global inp
     inp = time.time()
     while korak < 1000:
