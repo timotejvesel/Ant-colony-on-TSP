@@ -7,7 +7,7 @@ def izberi_pot(ant,vozlisce,neobiskana,pher,verjetnosti,razdalja,seznam,n,a,b,q0
     vsota = 0
     for i in range(n):
         if neobiskana[ant][i] == 1:
-            verjetnosti[i] = (pher[vozlisce][i]**a)*(razdalja[vozlisce][i]**b)
+            verjetnosti[i] = (pher[vozlisce][i]**a)*((1/razdalja[vozlisce][i])**b)
             vsota += (pher[vozlisce][i]**a)*(razdalja[vozlisce][i]**b)
         else:
             verjetnosti[i] = 0
@@ -41,9 +41,10 @@ def main():
         for j in range(n):
             razdalja[i][j] = i*j+1
     korak = 0
+    print(razdalja)
     global inp
     inp = time.time()
-    while korak < 750:
+    while korak < 1000:
         korak += 1
         pot = [[] for i in range(m)] # pot za vsako mravljo
         neobiskana = [[1]*n for i in range(m)] # mnozica neobiskanih vozlisc za vsako mravljo (morda bolj smiselno sete za boljso casovno zahtebnost)
