@@ -22,8 +22,20 @@ def izberi_pot(ant,vozlisce,neobiskana,pher,verjetnosti,razdalja,seznam,n,a,b,q0
     for i in range(n):
         if verjetnosti[i] > q0*vsota:
             return [i]
-
-    return choices(seznam,verjetnosti)
+    # Ce izberemo slabe vhodne podatke lahko pride do podkoracitve, zaradi pomanjkanja pheronoma
+    # To povzroci Error, saj choices opravlja z verjetnostmi, ki so vse enake 0.
+    # To resimo tako, da uvedemo funkcijo try, except, ki v primeru, da pride do podkoracitve izbere naslednje vozlisce, ki je mravlja se ni obiskala
+    # Ker pa velja, da v primeru podkoracitve program vec ne dela kot bi moral, so rezultati primerno slabsi
+    # Zato program opozori, da je prislo do podkoracitve, kar je signal, da je treba spremeniti vhodne parametre.
+    
+    try:
+            a = choices(seznam,verjetnosti)
+    except:
+            print("PODKORACITEV!")
+            for i in range(n):
+                    if neobiskana[ant][i] == 1:
+                            return [i]
+    return a
     
 def spremeni_obliko(tabela,n):
     # Za planarne grafe navadno dobimo podatke v obliki koordinat (x,y).
