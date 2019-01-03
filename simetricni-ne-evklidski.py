@@ -22,12 +22,12 @@ def izberi_pot(ant,vozlisce,neobiskana,pher,verjetnosti,razdalja,seznam,n,a,b,q0
     vsota = 0
     for i in range(n):
         if neobiskana[ant][i] == 1:
-            verjetnosti[i] = (pher[vozlisce][i]**a)*((1/razdalja[vozlisce][i])**b)
+            verjetnosti[i] = (pher[vozlisce][i]**a)*((1/(razdalja[vozlisce][i]+1))**b)
             vsota += (pher[vozlisce][i]**a)*(razdalja[vozlisce][i]**b)
         else:
             verjetnosti[i] = 0
     for i in range(n):
-        if verjetnosti[i]/vsota > q0:
+        if verjetnosti[i] > q0*vsota:
             return [i]
 
     return choices(seznam,verjetnosti)
@@ -41,7 +41,7 @@ def main():
     q0 = 0.9 # pozresnost
     m = 10 # stevilo mravelj
     q = 0.1 # kolicina pher, ki ga izloci ena mravlja
-    n = 36 #int(input()) #stevilo_mest
+    n = 17 #int(input()) #stevilo_mest
     razdalja = [[0]*n for i in range(n)]    
     pher = [[c]*n for i in range(n)]
     verjetnosti = [0]*n
@@ -51,7 +51,7 @@ def main():
     pher_dodan = [[0]*n for i in range(n)]
     min_dolzina = math.inf
     opt_pot = []
-    razdalja = trikotna("",n)
+    razdalja = trikotna("br17.txt",n)
     korak = 0
     global inp
     inp = time.time()
@@ -124,6 +124,6 @@ def average(stevilo): # izračun povprečnega "najboljšega " obhoda ob želenm 
     print(najkrajsa_pot)
     return(vsota/stevilo, najkrajsa_dolzina, najkrajsa_pot)
 print("Določite število iteracij algoritma")
-print("Ena iteracija traja približno 30 sekund (Problem ftv35)")
+print("Ena iteracija traja približno 4 sekunde (Problem br17)")
 A = int(input())
 average(A)
