@@ -125,13 +125,29 @@ def main():
             pher_dodan[opt_pot[i][0]][opt_pot[i][1]] = 0
             pher_dodan[opt_pot[i][1]][opt_pot[i][0]] = 0
     #print(dolzina_poti) # dolzina poti v zadnji iteraciji, (samo informativno)
-    print(opt_pot) # optimalna pot (to nas zanima!)
-    print(min_dolzina) # dolzina opt poti (to nas zanima!)
+    #print(opt_pot) # optimalna pot (to nas zanima!)
+    #print(min_dolzina) # dolzina opt poti (to nas zanima!)
+    return min_dolzina, opt_pot
     #print(pher) # kolicina pher ob koncu hitro opazis da so ene popolnoma polne druge prazne (samo informativno)
     global tj
     tj= time.time()
     print("Ant Colony " + str(tj-inp))
-for i in range(10):
-    main()
-t = time.time()
-print("skupni " + str(t - start))
+#for i in range(10):
+#    main()
+#t = time.time()
+#print("skupni " + str(t - start))
+
+def average(stevilo): # izračun povprečnega "najboljšega " obhoda ob želenm številu ponovitev algoritma, vrne tudi najkrajsi obhod in njegovo dolzino
+    vsota = 0
+    najkrajsa_pot = []
+    najkrajsa_dolzina = math.inf
+    for i in range(stevilo):
+        print(i)
+        dolzina, pot = main()
+        vsota += dolzina
+        if dolzina < najkrajsa_dolzina:
+            najkrajsa_dolzina = dolzina
+            najkrajsa_pot = pot
+    t = time.time()
+    print("skupni " + str(t - start))
+    return(vsota/stevilo, najkrajsa_dolzina, najkrajsa_pot)
