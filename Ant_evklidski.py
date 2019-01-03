@@ -1,18 +1,17 @@
 from random import *
 import time
 start = time.time()
-# Pognati moramo funkcijo average(stevilo) z zelenim stevilom ponovitev programa.
-
+# Ko program poženemo, bo ta ponovil 10 iteracij algoritma
 # Ant Colony za iskanje najkrajše poti za problem TSP
 # Za vsako iteracijo je dodana funkcija time
 # Za vsako iteracijo zato vemo koliko casa porabi
 # Izbiro problema dolocimo v 58. vrstici, kjer z ukazom open.file("ime datoteke",r) dolocimo, katero datotetko bomo prebrali
 #
 def izberi_pot(ant,vozlisce,neobiskana,pher,verjetnosti,razdalja,seznam,n,a,b,q0):
-    # Vsaka mravlja se v vsakem vozliscu odloca, katero vozlisce bo naslednje obiskala.
+    # Vsaka mravlja se v vsakem vozliscu odloca, katero vozlisce bo naslednje obisakala.
     # Ta proces simulira funkcija izberi_pot
     # Najprej izracunamo verjetnosti obiska za vsako vozlisce, ki ga mravlja se ni obiskala
-    # Nato pa s funkcijo choice nakljucno izberemo eno izmed vozlisc glede na izracunane verjetnosti.
+    # Nato pa s funkcijo choice nakljucno izberemo eno izmed vozlisc.
     vsota = 0
     for i in range(n):
         if neobiskana[ant][i] == 1:
@@ -20,12 +19,12 @@ def izberi_pot(ant,vozlisce,neobiskana,pher,verjetnosti,razdalja,seznam,n,a,b,q0
             vsota += (pher[vozlisce][i]**a)*(razdalja[vozlisce][i]**b)
         else:
             verjetnosti[i] = 0
-    for i in range(n):
+    for i in range(n): # Če je verjetnost, da obiščemo neko vozlišče > 90%, se za to vozlišče nemudoma
         if verjetnosti[i] > q0*vsota:
             return [i]
-    # Ce izberemo slabe vhodne podatke lahko pride do podkoracitve, zaradi pomanjkanja pheronoma
-    # To povzroci Error, saj choices opravlja z verjetnostmi, ki so vse enake 0.
-    # To resimo tako, da uvedemo funkcijo try, except, ki v primeru, da pride do podkoracitve izbere naslednje vozlisce, ki je mravlja se ni obiskala
+    # Ce izberemo slabe vhodne podatke lahko pride do podkoracitve, zaradi pomanjkanja feromona
+    # To povzroci Error, saj "choices" opravlja z verjetnostmi, ki so vse enake 0.
+    # To resimo tako, da uvedemo funkcijo "try", "except", ki v primeru, da pride do podkoracitve izbere naslednje vozlisce, ki je mravlja se ni obiskala
     # Ker pa velja, da v primeru podkoracitve program vec ne dela kot bi moral, so rezultati primerno slabsi
     # Zato program opozori, da je prislo do podkoracitve, kar je signal, da je treba spremeniti vhodne parametre.
     
@@ -39,8 +38,8 @@ def izberi_pot(ant,vozlisce,neobiskana,pher,verjetnosti,razdalja,seznam,n,a,b,q0
     return a
     
 def spremeni_obliko(tabela,n):
-    # Za evklidske grafe navadno dobimo podatke v obliki koordinat (x,y).
-    # Zato je treba iracunati razdalje (evklidske) med vozlisci, da dobimo matriko uteži.
+    # Za planarne grafe navadno dobimo podatke v obliki koordinat (x,y).
+    # Zato je treba izračunati razdalje (evklidske) med vozlisci, da dobimo matriko uteži.
     razdalja = [[0]*n for i in range(n)]
     for i in range(n):
         for j in range(n):
@@ -105,7 +104,7 @@ def main():
                     neobiskana[j][naslednje_vozlisce] = 0
                 pher[pot[j][i][0]][pot[j][i][1]] = (1-s)*pher[pot[j][i][0]][pot[j][i][1]] + s*c #sprememba feronoma, namenjena temu, da mravlje ne bi uporabljale istih poti v istem vrstnem redu
                 # Dodatno pojasnilo:
-                # Brez tega dodatka, bi hitro verjetnosti, da ponavljamo prvo najkrajso pot, ki smo jo nasli postajale vedno vecje in ostali bi v lokalnem minimumu
+                # Brez tega dodatka, bi hitro verjetnosti da ponavljamo prvo najkrajso pot, ki smo jo nasli postajale vedno vecje in ostali bi v lokalnem minimumu
                 # S pomocjo te funkcije imajo mravlje dodatno "motivacijo" spreminjati svojo pot in s tem lahko najdejo se kaksen lok min.
                 pher[pot[j][i][1]][pot[j][i][0]] = pher[pot[j][i][0]][pot[j][i][1]] #Za simetricne grafe sta utezi za obe smeri seveda enaki
 
