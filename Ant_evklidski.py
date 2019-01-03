@@ -2,7 +2,6 @@ from random import *
 import time
 start = time.time()
 import math
-# Ko program poženemo, bo ta ponovil 10 iteracij algoritma
 # Ant Colony za iskanje najkrajše poti za problem TSP
 # Za vsako iteracijo je dodana funkcija time
 # Za vsako iteracijo zato vemo koliko casa porabi
@@ -20,7 +19,7 @@ def izberi_pot(ant,vozlisce,neobiskana,pher,verjetnosti,razdalja,seznam,n,a,b,q0
             vsota += (pher[vozlisce][i]**a)*(razdalja[vozlisce][i]**b)
         else:
             verjetnosti[i] = 0
-    for i in range(n): # Če je verjetnost, da obiščemo neko vozlišče > 90%, se za to vozlišče nemudoma
+    for i in range(n): # Če je verjetnost, da obiščemo neko vozlišče > 90%, se za to vozlišče nemudoma odločimo.
         if verjetnosti[i] > q0*vsota:
             return [i]
     # Ce izberemo slabe vhodne podatke lahko pride do podkoracitve, zaradi pomanjkanja feromona
