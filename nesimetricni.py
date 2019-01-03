@@ -106,17 +106,26 @@ def main():
     print("Ant Colony " + str(tj-inp))
 
 
-def average(stevilo): # izračun povprečnega "najboljšega " obhoda ob želen številu ponovitev algoritma.
+def average(stevilo): # izračun povprečnega "najboljšega " obhoda ob želenm številu ponovitev algoritma, vrne tudi najkrajsi obhod in njegovo dolzino
     vsota = 0
     najkrajsa_pot = []
     najkrajsa_dolzina = math.inf
     for i in range(stevilo):
         print(i)
         dolzina, pot = main()
+        print(dolzina)
         vsota += dolzina
         if dolzina < najkrajsa_dolzina:
             najkrajsa_dolzina = dolzina
             najkrajsa_pot = pot
     t = time.time()
     print("skupni " + str(t - start))
+    print("Povprečna dolžina " + str(vsota/stevilo))
+    print("Dolžina najboljše poti " + str(najkrajsa_dolzina))
+    print("Najboljša pot ")
+    print(najkrajsa_pot)
     return(vsota/stevilo, najkrajsa_dolzina, najkrajsa_pot)
+print("Določite število iteracij algoritma")
+print("Ena iteracija traja približno 35 sekund (Problem ftv35)")
+A = int(input())
+average(A)
