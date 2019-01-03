@@ -88,7 +88,7 @@ def main():
 
         for i in range(n-1):
             pher_dodan[opt_pot[i][0]][opt_pot[i][1]] = p*(q/min_dolzina)
-            pher_dodan[opt_pot[i][1]][opt_pot[i][0]] = pher[opt_pot[i][0]][opt_pot[i][1]]
+            #pher_dodan[opt_pot[i][1]][opt_pot[i][0]] = pher[opt_pot[i][0]][opt_pot[i][1]]
         for i in range(n):
             for j in range(n):
                 pher[i][j] = (1-p)*pher[i][j] + pher_dodan[i][j]
