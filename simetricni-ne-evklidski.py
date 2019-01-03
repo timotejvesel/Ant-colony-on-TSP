@@ -51,7 +51,7 @@ def main():
     pher_dodan = [[0]*n for i in range(n)]
     min_dolzina = math.inf
     opt_pot = []
-    razdalja = explicit_full("ftv35.txt",n)
+    razdalja = trikotna("",n)
     korak = 0
     global inp
     inp = time.time()
