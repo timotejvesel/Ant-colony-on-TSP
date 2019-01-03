@@ -1,17 +1,18 @@
 from random import *
 import time
 start = time.time()
-# Ko program poženemo, bo ta ponovil 10 iteracij algoritma
+# Pognati moramo funkcijo average(stevilo) z zelenim stevilom ponovitev programa.
+
 # Ant Colony za iskanje najkrajše poti za problem TSP
 # Za vsako iteracijo je dodana funkcija time
 # Za vsako iteracijo zato vemo koliko casa porabi
 # Izbiro problema dolocimo v 58. vrstici, kjer z ukazom open.file("ime datoteke",r) dolocimo, katero datotetko bomo prebrali
 #
 def izberi_pot(ant,vozlisce,neobiskana,pher,verjetnosti,razdalja,seznam,n,a,b,q0):
-    # Vsaka mravlja se v vsakem vozliscu odloca, katero vozlisce bo naslednje obisakala.
+    # Vsaka mravlja se v vsakem vozliscu odloca, katero vozlisce bo naslednje obiskala.
     # Ta proces simulira funkcija izberi_pot
     # Najprej izracunamo verjetnosti obiska za vsako vozlisce, ki ga mravlja se ni obiskala
-    # Nato pa s funkcijo choice nakljucno izberemo eno izmed vozlisc.
+    # Nato pa s funkcijo choice nakljucno izberemo eno izmed vozlisc glede na izracunane verjetnosti.
     vsota = 0
     for i in range(n):
         if neobiskana[ant][i] == 1:
@@ -38,7 +39,7 @@ def izberi_pot(ant,vozlisce,neobiskana,pher,verjetnosti,razdalja,seznam,n,a,b,q0
     return a
     
 def spremeni_obliko(tabela,n):
-    # Za planarne grafe navadno dobimo podatke v obliki koordinat (x,y).
+    # Za evklidske grafe navadno dobimo podatke v obliki koordinat (x,y).
     # Zato je treba iracunati razdalje (evklidske) med vozlisci, da dobimo matriko uteži.
     razdalja = [[0]*n for i in range(n)]
     for i in range(n):
@@ -104,7 +105,7 @@ def main():
                     neobiskana[j][naslednje_vozlisce] = 0
                 pher[pot[j][i][0]][pot[j][i][1]] = (1-s)*pher[pot[j][i][0]][pot[j][i][1]] + s*c #sprememba feronoma, namenjena temu, da mravlje ne bi uporabljale istih poti v istem vrstnem redu
                 # Dodatno pojasnilo:
-                # Brez tega dodatka, bi hitro verjetnosti da ponavljamo prvo najkrajso pot, ki smo jo nasli postajale vedno vecje in ostali bi v lokalnem minimumu
+                # Brez tega dodatka, bi hitro verjetnosti, da ponavljamo prvo najkrajso pot, ki smo jo nasli postajale vedno vecje in ostali bi v lokalnem minimumu
                 # S pomocjo te funkcije imajo mravlje dodatno "motivacijo" spreminjati svojo pot in s tem lahko najdejo se kaksen lok min.
                 pher[pot[j][i][1]][pot[j][i][0]] = pher[pot[j][i][0]][pot[j][i][1]] #Za simetricne grafe sta utezi za obe smeri seveda enaki
 
