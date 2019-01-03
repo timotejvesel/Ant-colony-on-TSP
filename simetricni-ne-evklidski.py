@@ -98,27 +98,32 @@ def main():
         for i in range(n-1):
             pher_dodan[opt_pot[i][0]][opt_pot[i][1]] = 0
             pher_dodan[opt_pot[i][1]][opt_pot[i][0]] = 0
-  #print(dolzina_poti) # dolzina poti v zadnji iteraciji, (samo informativno)
-    #print(opt_pot) # optimalna pot (to nas zanima!)
-    #print(min_dolzina) # dolzina opt poti (to nas zanima!)
-    return min_dolzina, opt_pot
-    #print(pher) # kolicina pher ob koncu hitro opazis da so ene popolnoma polne druge prazne (samo informativno)
+
     global tj
     tj= time.time()
     print("Ant Colony " + str(tj-inp))
+    return min_dolzina, opt_pot
 
-
-def average(stevilo): # izračun povprečnega "najboljšega " obhoda ob želen številu ponovitev algoritma.
+def average(stevilo): # izračun povprečnega "najboljšega " obhoda ob želenm številu ponovitev algoritma, vrne tudi najkrajsi obhod in njegovo dolzino
     vsota = 0
     najkrajsa_pot = []
     najkrajsa_dolzina = math.inf
     for i in range(stevilo):
         print(i)
         dolzina, pot = main()
+        print(dolzina)
         vsota += dolzina
         if dolzina < najkrajsa_dolzina:
             najkrajsa_dolzina = dolzina
             najkrajsa_pot = pot
     t = time.time()
-    print("skupni " + str(t - start))
+    print("skupni čas" + str(t - start))
+    print("Povprečna dolžina " + str(vsota/stevilo))
+    print("Dolžina najboljše poti " + str(najkrajsa_dolzina))
+    print("Najboljša pot ")
+    print(najkrajsa_pot)
     return(vsota/stevilo, najkrajsa_dolzina, najkrajsa_pot)
+print("Določite število iteracij algoritma")
+print("Ena iteracija traja približno 30 sekund (Problem ftv35)")
+A = int(input())
+average(A)
