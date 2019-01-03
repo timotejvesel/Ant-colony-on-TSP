@@ -87,10 +87,10 @@ def main():
         for i in range(n-1):
             pher_dodan[opt_pot[i][0]][opt_pot[i][1]] = 0
             pher_dodan[opt_pot[i][1]][opt_pot[i][0]] = 0
-    #print(dolzina_poti) # dolzina poti v zadnji iteraciji, (samo informativno)
-    #print(opt_pot) # optimalna pot (to nas zanima!)
+    #print(dolzina_poti) # dolzina poti v zadnji iteraciji
+    #print(opt_pot) # optimalna pot 
     print(min_dolzina) # dolzina opt poti (to nas zanima!)
-    #print(pher) # kolicina pher ob koncu hitro opazis da so ene popolnoma polne druge prazne (samo informativno)
+    #print(pher) # kolicina pher ob koncu 
     global tj
     tj= time.time()
     print("Ant Colony " + str(tj-inp))
